@@ -128,8 +128,8 @@ PROGRAM MembraneExtension2DSpace
   
   CALL cmfe_WorkGroup_Initialise(worldWorkGroup,err)
   CALL cmfe_ComputationEnvironment_WorldWorkGroupGet(computationEnvironment,worldWorkGroup,err)
-  CALL cmfe_WorkGroup_NumberOfGroupNodesGet(worldWorkGroup,numberOfComputationNodes,err)
-  CALL cmfe_WorkGroup_GroupNodeNumberGet(worldWorkGroup,computationNodeNumber,err)
+  CALL cmfe_WorkGroup_NumberOfGroupNodesGet(worldWorkGroup,numberOfComputationalNodes,err)
+  CALL cmfe_WorkGroup_GroupNodeNumberGet(worldWorkGroup,computationalNodeNumber,err)
 
   !Create a CS - default is 3D rectangular cartesian CS with 0,0,0 as origin
   CALL cmfe_CoordinateSystem_Initialise(CoordinateSystem,Err)
