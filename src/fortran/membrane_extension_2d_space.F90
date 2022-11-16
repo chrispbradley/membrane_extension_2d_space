@@ -20,6 +20,7 @@ PROGRAM MembraneExtension2DSpace
 
   !Test program parameters
 
+  INTEGER(CMISSIntg), PARAMETER :: ContextUserNumber=1
   INTEGER(CMISSIntg), PARAMETER :: CoordinateSystemUserNumber=1
   INTEGER(CMISSIntg), PARAMETER :: NumberOfSpatialCoordinates=2
   INTEGER(CMISSIntg), PARAMETER :: RegionUserNumber=1
@@ -110,17 +111,18 @@ PROGRAM MembraneExtension2DSpace
   IF(.NOT.QUICKWIN_STATUS) QUICKWIN_STATUS=SETWINDOWCONFIG(QUICKWIN_WINDOW_CONFIG)
 #endif
 
-  !Intialise cmiss
-  CALL cmfe_Context_Initialise(context,err)
-  CALL cmfe_Initialise(context,err)
+  !Intialise OpenCMISS
+  CALL cmfe_Initialise(err)
   CALL cmfe_ErrorHandlingModeSet(CMFE_ERRORS_TRAP_ERROR,err)
+  !Set all diganostic levels on for testing
+  CALL cmfe_DiagnosticsSetOn(CMFE_FROM_DIAG_TYPE,[1,2,3,4,5],"Diagnostics",["PROBLEM_FINITE_ELEMENT_CALCULATE"],Err)
+  !Create a context
+  CALL cmfe_Context_Initialise(context,err)
+  CALL cmfe_Context_Create(ContextUserNumber,context,err)
   CALL cmfe_Region_Initialise(worldRegion,err)
   CALL cmfe_Context_WorldRegionGet(context,worldRegion,err)
 
   WRITE(*,'(A)') "Program starting."
-
-  !Set all diganostic levels on for testing
-  CALL cmfe_DiagnosticsSetOn(CMFE_FROM_DIAG_TYPE,[1,2,3,4,5],"Diagnostics",["PROBLEM_FINITE_ELEMENT_CALCULATE"],Err)
 
   !Get the number of computational nodes and this computational node number
   CALL cmfe_ComputationEnvironment_Initialise(computationEnvironment,err)
@@ -355,7 +357,10 @@ PROGRAM MembraneExtension2DSpace
   CALL cmfe_Fields_ElementsExport(Fields,"./results/MembraneExtension2DSpace","FORTRAN",Err)
   CALL cmfe_Fields_Finalise(Fields,Err)
 
-  CALL cmfe_Finalise(context,Err)
+  !Destroy the context
+  CALL cmfe_Context_Destroy(context,err)
+  !Finalise OpenCMISS
+  CALL cmfe_Finalise(err)
 
   WRITE(*,'(A)') "Program successfully completed."
 
