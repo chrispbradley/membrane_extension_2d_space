@@ -1,6 +1,6 @@
 add_executable(${ExampleName} ${ExampleName}.F90)
 target_compile_options(${ExampleName} PRIVATE -ffpe-trap=invalid,zero,overflow)
-target_link_libraries(${ExampleName} PRIVATE opencmisslibs)
+target_link_libraries(${ExampleName} PRIVATE OpenCMISS::libOpenCMISS_Fortran)
 
 install(TARGETS ${ExampleName} DESTINATION bin)
 

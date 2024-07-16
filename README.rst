@@ -10,8 +10,10 @@ Building the example
 Instructions on how to configure and build with CMake::
 
   git clone https://github.com/OpenCMISS-Examples/membrane_extension_2d_space.git
+  cd membrane_extension_2d_space
   mkdir build
-  cmake -DOpenCMISSLibs_DIR=/path/to/opencmisslib/install ../membrane_extension_2d_space
+  cd build
+  cmake -DOpenCMISS_INSTALL_ROOT=/path/to/opencmiss/install ../.
   make  # cmake --build . will also work here and is much more platform agnostic.
 
 Running the example
@@ -19,7 +21,6 @@ Running the example
 
 Explain how the example is run::
 
-  cd build
   ./src/fortran/membrane_extension_2d_space.F90
 
 or maybe it is a Python only example::
