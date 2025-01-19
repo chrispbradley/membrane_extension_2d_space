@@ -224,6 +224,7 @@ PROGRAM MembraneExtension2DSpace
   CALL OC_Field_geometricFieldSet(dependentField,geometricField,err)
   CALL OC_Field_DependentTypeSet(dependentField,OC_FIELD_DEPENDENT_TYPE,err)
   CALL OC_Field_NumberOfVariablesSet(dependentField,FIELD_DEPENDENT_NUMBER_OF_VARIABLES,err)
+  CALL OC_Field_VariableTypesSet(dependentField,[OC_FIELD_U_VARIABLE_TYPE,OC_FIELD_T_VARIABLE_TYPE],err)
   CALL OC_Field_NumberOfComponentsSet(dependentField,OC_FIELD_U_VARIABLE_TYPE,FIELD_DEPENDENT_NUMBER_OF_COMPONENTS,err)
   CALL OC_Field_NumberOfComponentsSet(dependentField,OC_FIELD_T_VARIABLE_TYPE,FIELD_DEPENDENT_NUMBER_OF_COMPONENTS,err)
   CALL OC_Field_ComponentMeshComponentSet(dependentField,OC_FIELD_U_VARIABLE_TYPE,1,MESH_COMPONENT_NUMBER,err)
@@ -275,7 +276,7 @@ PROGRAM MembraneExtension2DSpace
   CALL OC_Problem_SolversCreateStart(problem,err)
   CALL OC_Problem_SolverGet(problem,OC_CONTROL_LOOP_NODE,1,solver,err)
   CALL OC_Solver_OutputTypeSet(solver,OC_SOLVER_PROGRESS_OUTPUT,err)
-  CALL OC_Solver_NewtonJacobianCalculationTypeSet(solver,OC_SOLVER_NEWTON_JACOBIAN_FD_CALCULATED,err)
+  CALL OC_Solver_NewtonJacobianCalculationTypeSet(solver,OC_SOLVER_NEWTON_JACOBIAN_EQUATIONS_CALCULATED,err)
   CALL OC_Problem_SolversCreateFinish(problem,err)
 
   !Create the problem solver equations
